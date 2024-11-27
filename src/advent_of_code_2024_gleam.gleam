@@ -11,11 +11,16 @@ pub fn main() {
 
       let assert Ok(_) = simplifile.create_directory("./src/" <> name)
 
-      let assert Ok(_) = simplifile.create_file(path)
-      let assert Ok(_) = simplifile.write(path, "hey")
+      let assert Ok(_) = write_new_file(path, "hey")
+
       io.println("Hello from advent_of_code_2024_gleam day " <> name <> "!")
     }
 
     _ -> io.println("usage: gleam run <day>")
   }
+}
+
+fn write_new_file(path, contents) {
+  let assert Ok(_) = simplifile.create_file(path)
+  let assert Ok(_) = simplifile.write(path, contents)
 }
