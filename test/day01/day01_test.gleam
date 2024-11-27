@@ -2,7 +2,7 @@ import gleeunit
 import gleeunit/should
 import simplifile
 
-const sample_path: String = "./test/day01/day01_sample.txt"
+const sample_path = "./test/day01/day01_sample.txt"
 
 pub fn main() {
   gleeunit.main()
