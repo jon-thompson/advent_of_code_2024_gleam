@@ -1,3 +1,4 @@
+import day01/day01
 import gleeunit
 import gleeunit/should
 import simplifile
@@ -8,9 +9,10 @@ pub fn main() {
   gleeunit.main()
 }
 
-pub fn day01_test() {
+pub fn day01_part1_test() {
   let assert Ok(contents) = simplifile.read(sample_path)
 
   contents
-  |> should.equal("horsing around")
+  |> day01.part1
+  |> should.equal(14)
 }
