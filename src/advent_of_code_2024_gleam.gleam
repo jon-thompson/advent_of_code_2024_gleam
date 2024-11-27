@@ -48,7 +48,52 @@ fn write_test_files(name) {
     result.all([
       write_new_file(dir <> "/" <> name <> "_puzzle.txt", ""),
       write_new_file(dir <> "/" <> name <> "_sample.txt", ""),
-      write_new_file(dir <> "/" <> name <> "_test.gleam", ""),
+      write_new_file(
+        dir <> "/" <> name <> "_test.gleam",
+        "
+import {name}/{name}
+import gleeunit/should
+import simplifile
+
+const sample_path = \"./test/{name}/{name}_sample.txt\"
+
+const puzzle_path = \"./test/{name}/{name}_puzzle.txt\"
+
+pub fn {name}_part1_sample_test() {
+  let assert Ok(contents) = simplifile.read(sample_path)
+
+  contents
+  |> {name}.part1
+  |> should.equal(14)
+}
+
+pub fn {name}_part1_puzzle_test() {
+  let assert Ok(contents) = simplifile.read(puzzle_path)
+
+  contents
+  |> {name}.part1
+  |> should.equal(25)
+}
+
+pub fn {name}_part2_sample_test() {
+  let assert Ok(contents) = simplifile.read(sample_path)
+
+  contents
+  |> {name}.part2
+  |> should.equal(28)
+}
+
+pub fn {name}_part2_puzzle_test() {
+  let assert Ok(contents) = simplifile.read(puzzle_path)
+
+  contents
+  |> {name}.part2
+  |> should.equal(50)
+}
+"
+          |> string.replace("{name}", name)
+          |> io.debug,
+      ),
     ])
   })
   |> result.map(fn(_) { Nil })
