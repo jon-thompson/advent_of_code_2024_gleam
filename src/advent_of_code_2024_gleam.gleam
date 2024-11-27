@@ -9,7 +9,7 @@ pub fn main() {
     [day] -> {
       let name = "day" <> string.pad_start(day, 2, "0")
 
-      write_src_file(name)
+      result.all([write_src_file(name), write_test_files(name)])
       |> result.map(fn(_) { io.println(name <> " generated!") })
       |> result.lazy_unwrap(fn() { io.println("Ruh roh!") })
     }
@@ -38,6 +38,20 @@ pub fn part2(input: String) -> Int {
 ",
     )
   })
+}
+
+fn write_test_files(name) {
+  let dir = "./test/" <> name
+
+  simplifile.create_directory(dir)
+  |> result.then(fn(_) {
+    result.all([
+      write_new_file(dir <> "/" <> name <> "_puzzle.txt", ""),
+      write_new_file(dir <> "/" <> name <> "_sample.txt", ""),
+      write_new_file(dir <> "/" <> name <> "_test.gleam", ""),
+    ])
+  })
+  |> result.map(fn(_) { Nil })
 }
 
 fn write_new_file(path, contents) {
