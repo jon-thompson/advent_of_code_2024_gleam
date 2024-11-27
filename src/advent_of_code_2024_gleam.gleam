@@ -7,12 +7,13 @@ pub fn main() {
   case argv.load().arguments {
     [day] -> {
       let name = "day" <> string.pad_start(day, 2, "0")
-      let path = "./src/" <> name <> "/" <> name <> ".gleam"
+      let src_dir = "./src/" <> name
+      let src_path = src_dir <> "/" <> name <> ".gleam"
 
-      let assert Ok(_) = simplifile.create_directory("./src/" <> name)
+      let assert Ok(_) = simplifile.create_directory(src_dir)
       let assert Ok(_) =
         write_new_file(
-          path,
+          src_path,
           "import gleam/string
 
 pub fn part1(input: String) -> Int {
