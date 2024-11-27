@@ -22,5 +22,5 @@ pub fn day01_part2_test() {
 
   contents
   |> day01.part2
-  |> should.equal(14)
+  |> should.equal(28)
 }

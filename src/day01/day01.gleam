@@ -5,5 +5,5 @@ pub fn part1(input: String) -> Int {
 }
 
 pub fn part2(input: String) -> Int {
-  string.length(input)
+  2 * string.length(input)
 }
