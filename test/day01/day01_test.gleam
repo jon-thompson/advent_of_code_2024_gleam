@@ -16,3 +16,11 @@ pub fn day01_part1_test() {
   |> day01.part1
   |> should.equal(14)
 }
+
+pub fn day01_part2_test() {
+  let assert Ok(contents) = simplifile.read(sample_path)
+
+  contents
+  |> day01.part2
+  |> should.equal(14)
+}
