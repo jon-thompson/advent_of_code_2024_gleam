@@ -1,5 +1,6 @@
 import argv
 import gleam/io
+import gleam/result
 import gleam/string
 import simplifile
 
@@ -10,8 +11,8 @@ pub fn main() {
       let src_dir = "./src/" <> name
       let src_path = src_dir <> "/" <> name <> ".gleam"
 
-      let assert Ok(_) = simplifile.create_directory(src_dir)
-      let assert Ok(_) =
+      simplifile.create_directory(src_dir)
+      |> result.then(fn(_) {
         write_new_file(
           src_path,
           "import gleam/string
@@ -25,8 +26,9 @@ pub fn part2(input: String) -> Int {
 }
 ",
         )
-
-      io.println("Hello from advent_of_code_2024_gleam day " <> name <> "!")
+      })
+      |> result.map(fn(_) { io.println(name <> " generated!") })
+      |> result.lazy_unwrap(fn() { io.println("Ruh roh!") })
     }
 
     _ -> io.println("usage: gleam run <day>")
@@ -34,6 +36,6 @@ pub fn part2(input: String) -> Int {
 }
 
 fn write_new_file(path, contents) {
-  let assert Ok(_) = simplifile.create_file(path)
-  simplifile.write(path, contents)
+  simplifile.create_file(path)
+  |> result.then(fn(_) { simplifile.write(path, contents) })
 }
