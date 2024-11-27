@@ -1,15 +1,10 @@
 import day01/day01
-import gleeunit
 import gleeunit/should
 import simplifile
 
 const sample_path = "./test/day01/day01_sample.txt"
 
 const puzzle_path = "./test/day01/day01_puzzle.txt"
-
-pub fn main() {
-  gleeunit.main()
-}
 
 pub fn day01_part1_sample_test() {
   let assert Ok(contents) = simplifile.read(sample_path)
